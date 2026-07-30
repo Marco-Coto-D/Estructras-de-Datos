@@ -85,6 +85,20 @@ class SingleLinkedList:
             actual = actual.next
         actual.next = None
 
+    def buscar(self, valor):
+        contador = 0
+        current = self.head
+        while current is not None:
+            if current.data == valor:
+                print(f"Valor {valor} encontrado en la lista en la posición {contador}.")
+                return
+            current = current.next
+            contador += 1
+        print(f"Valor {valor} no encontrado en la lista.")
+
+    def esVacia(self):
+        return self.head is None
+
 
 class Menu:
     def __init__(self):
