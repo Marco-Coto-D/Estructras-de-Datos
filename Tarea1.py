@@ -131,6 +131,7 @@ class Menu:
             print("2. Eliminar producto por ID")
             print("3. Buscar producto por ID")
             print("4. Mostrar productos")
+            print("5. Generar reporte de recuperación")
             print("0. Salir")
 
             opcion = input("Seleccione una opción: ")
@@ -156,6 +157,9 @@ class Menu:
             elif opcion == "4":
                 print("Productos en la lista:")
                 self.lista.mostrar()
+            elif opcion == "5":
+                self.lista.generarReporte()
+                print("Reporte generado.")
             elif opcion == "0":
                 print("Saliendo del programa.")
                 break
