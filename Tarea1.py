@@ -100,3 +100,56 @@ class ListaDoble:
                 existente.frecuencia += 1
             current = current.next
         return frecuencias
+
+    def generarReporte(self, nombreArchivo="reporte_recuperacion.txt"):
+        PrecioTotal = 0
+        with open(nombreArchivo, "w") as archivo:
+            current = self.head
+            while current is not None:
+                producto = current.Producto
+                archivo.write(
+                    f"ID: {producto.ID}, Nombre: {producto.nombre}, "
+                    f"Cantidad: {producto.cantidad}, Precio: {producto.precio}\n"
+                )
+                PrecioTotal += producto.cantidad * producto.precio
+                current = current.next
+            archivo.write(f"Total a recuperar: {PrecioTotal}\n")
+        return PrecioTotal
+
+
+
+class Menu:
+    def __init__(self):
+        self.lista = ListaDoble()
+
+    def mostrarMenu(self):
+        while True:
+            print("\n--- Menú ---")
+            print("1. Insertar producto")
+            print("2. Eliminar producto por ID")
+            print("3. Buscar producto por ID")
+            print("0. Salir")
+
+            opcion = input("Seleccione una opción: ")
+
+            if opcion == "1":
+                ID = input("Ingrese el ID del producto: ")
+                nombre = input("Ingrese el nombre del producto: ")
+                precio = float(input("Ingrese el precio del producto: "))
+                paisOrigen = input("Ingrese el país de origen del producto: ")
+                cantidad = int(input("Ingrese la cantidad del producto: "))
+                producto = Productos(ID, nombre, precio, paisOrigen, cantidad)
+                self.lista.insertar(producto)
+            elif opcion == "2":
+                ID = input("Ingrese el ID del producto a eliminar: ")
+                self.lista.eliminar(ID)
+            elif opcion == "3":
+                ID = input("Ingrese el ID del producto a buscar: ")
+                producto = self.lista.buscarID(ID)
+                if producto:
+                    print(producto.toString())
+                else:
+                    print("Producto no encontrado.")
+            elif opcion == "0":
+                print("Saliendo del programa.")
+                break
