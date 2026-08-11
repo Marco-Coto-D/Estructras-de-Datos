@@ -41,12 +41,14 @@ class ListaDoble:
             self.tail = new_node
 
 
-    # Implementar recursividad
-    # def mostrar(self):
-    #   current = self.head
-    #    while current is not None:
-    #        print(current.Producto.toString())
-    #        current = current.next
+    def mostrar(self, current=None):
+        if current is None:
+            current = self.head
+        if current is None:
+            return
+        print(current.Producto.toString())
+        if current.next is not None:
+            self.mostrar(current.next)
 
     def eliminar(self, ID):
         current = self.head
