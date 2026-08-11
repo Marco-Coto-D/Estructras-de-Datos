@@ -10,6 +10,14 @@ class Productos:
         return f"ID: {self.ID}, Nombre: {self.nombre}, Precio: {self.precio}, País de Origen: {self.paisOrigen}, Cantidad: {self.cantidad}"
 
 
+class Pais:
+    def __init__(self, paisOrigen):
+        self.paisOrigen = paisOrigen
+        self.frecuencia = 1
+
+    def toString(self):
+        return f"País: {self.paisOrigen}, Frecuencia: {self.frecuencia}"
+
 class Node:
     def __init__(self, Producto):
         self.anterior = None
@@ -56,10 +64,18 @@ class ListaDoble:
             current = current.next
         print("Producto no encontrado")
 
-    def buscar(self, ID):
+    def buscarID(self, ID):
         current = self.head
         while current is not None:
             if (current.Producto.ID == ID):
+                return current.Producto
+            current = current.next
+        return None
+
+    def buscarPais(self, paisOrigen):
+        current = self.head
+        while current is not None:
+            if (current.Producto.paisOrigen == paisOrigen):
                 return current.Producto
             current = current.next
         return None
@@ -72,3 +88,15 @@ class ListaDoble:
                 cola_ProdVacios.append(current.Producto)
             current = current.next
         return cola_ProdVacios
+
+    def listaFrecuencias(self):
+        frecuencias = ListaDoble()
+        current = self.head
+        while current is not None:
+            existente = frecuencias.buscarPais(current.Producto.paisOrigen)
+            if existente is None:
+                frecuencias.insertar(Pais(current.Producto.paisOrigen))
+            else:
+                existente.frecuencia += 1
+            current = current.next
+        return frecuencias
