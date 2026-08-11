@@ -130,6 +130,7 @@ class Menu:
             print("1. Insertar producto")
             print("2. Eliminar producto por ID")
             print("3. Buscar producto por ID")
+            print("4. Mostrar productos")
             print("0. Salir")
 
             opcion = input("Seleccione una opción: ")
@@ -152,6 +153,13 @@ class Menu:
                     print(producto.toString())
                 else:
                     print("Producto no encontrado.")
+            elif opcion == "4":
+                print("Productos en la lista:")
+                self.lista.mostrar()
             elif opcion == "0":
                 print("Saliendo del programa.")
                 break
+
+
+menu = Menu()
+menu.mostrarMenu()
