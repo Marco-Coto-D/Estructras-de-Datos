@@ -87,6 +87,10 @@ def main():
 
     lista1 = ListaDoble()
     lista1.lecturaDatos("datos.txt")
+    print(f"El promedio de temperaturas es: {lista1.calcularPromedio()} °C")
+    print(f"La temperatura mayor es: {lista1.esMayor()} °C")
+    print(f"La temperatura menor es: {lista1.esMenor()} °C")
+
     lista1.escribir_reporte()
 
 if __name__ == "__main__":
