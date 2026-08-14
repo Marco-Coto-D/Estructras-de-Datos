@@ -29,16 +29,50 @@ class ListaDoble:
     def __init__(self):
         self.head = None
         self.tail = None
+        self.tamanio = 0
 
-    def insertar(self, producto):
+    def insertarFinal(self, producto):
         new_node = Node(producto)
         if self.head is None:
             self.head = new_node
             self.tail = new_node
+            self.tamanio += 1
+            return
         else:
             new_node.anterior = self.tail
             self.tail.next = new_node
             self.tail = new_node
+            self.tamanio += 1
+            return
+
+    def insertarMedio(self, posicion, producto):
+        if posicion < 0 or posicion > self.tamanio:
+            print("Posición inválida.")
+            return
+        if posicion == 0:
+            self.insertarFinal(producto)
+            return
+        if posicion == self.tamanio:
+            self.insertarFinal(producto)
+            return
+
+        nuevo = Node(producto)
+        current = self.head
+        contador = 0
+        while current is not None and contador < posicion - 1:
+            current = current.next
+            contador += 1
+
+        nuevo.anterior = current.anterior
+        nuevo.next = current
+
+        current.anterior.next = nuevo
+        current.anterior = nuevo
+
+        self.tamanio += 1
+
+        
+                    
 
 
     def mostrar(self, current=None):
@@ -97,7 +131,7 @@ class ListaDoble:
         while current is not None:
             existente = frecuencias.buscarPais(current.Producto.paisOrigen)
             if existente is None:
-                frecuencias.insertar(Pais(current.Producto.paisOrigen))
+                frecuencias.insertarFinal(Pais(current.Producto.paisOrigen))
             else:
                 existente.frecuencia += 1
             current = current.next
@@ -109,10 +143,7 @@ class ListaDoble:
             current = self.head
             while current is not None:
                 producto = current.Producto
-                archivo.write(
-                    f"ID: {producto.ID}, Nombre: {producto.nombre}, "
-                    f"Cantidad: {producto.cantidad}, Precio: {producto.precio}\n"
-                )
+                archivo.write(f"ID: {producto.ID}, Nombre: {producto.nombre}, " f"Cantidad: {producto.cantidad}, Precio: {producto.precio}\n")
                 PrecioTotal += producto.cantidad * producto.precio
                 current = current.next
             archivo.write(f"Total a recuperar: {PrecioTotal}\n")
@@ -143,7 +174,7 @@ class Menu:
                 paisOrigen = input("Ingrese el país de origen del producto: ")
                 cantidad = int(input("Ingrese la cantidad del producto: "))
                 producto = Productos(ID, nombre, precio, paisOrigen, cantidad)
-                self.lista.insertar(producto)
+                self.lista.insertarFinal(producto)
             elif opcion == "2":
                 ID = input("Ingrese el ID del producto a eliminar: ")
                 self.lista.eliminar(ID)

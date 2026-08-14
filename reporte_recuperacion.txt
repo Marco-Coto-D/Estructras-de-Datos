@@ -1,0 +1,4 @@
+ID: 1, Nombre: QUESITO DE MANU, Cantidad: 100, Precio: 3000.0
+ID: 2, Nombre: TANQUE NAZI, Cantidad: 1, Precio: 1000000.0
+ID: 3, Nombre: Vape Maskking, Cantidad: 4, Precio: 9000.0
+Total a recuperar: 1336000.0
