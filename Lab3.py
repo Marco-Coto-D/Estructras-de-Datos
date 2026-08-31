@@ -1,4 +1,5 @@
 import random
+import timeit
 from turtle import left
 
 datos = [random.randint(1, 100) for _ in range(20)]
@@ -44,3 +45,9 @@ def mergeSort(arr):
 
 print("Lista ordenada>: ")
 print(mergeSort(lista))
+tiempo10 = timeit.timeit(lambda: mergeSort(lista), number=10)
+print("Tiempo de ejecución:", tiempo10, "segundos") 
+tiempo100 = timeit.timeit(lambda: mergeSort(lista), number=100)
+print("Tiempo de ejecución:", tiempo100, "segundos")
+tiempo1000 = timeit.timeit(lambda: mergeSort(lista), number=1000)
+print("Tiempo de ejecución:", tiempo1000, "segundos")

@@ -111,7 +111,7 @@ class ListaDoble:
     def buscarPais(self, paisOrigen):
         current = self.head
         while current is not None:
-            if (current.Producto.paisOrigen == paisOrigen):
+            if current.Producto.paisOrigen == paisOrigen:
                 return current.Producto
             current = current.next
         return None
@@ -135,7 +135,18 @@ class ListaDoble:
             else:
                 existente.frecuencia += 1
             current = current.next
-        return frecuencias
+
+        paises = []
+        current = frecuencias.head
+        while current is not None:
+            paises.append(current.Producto)
+            current = current.next
+        paises.sort(key=lambda pais: pais.frecuencia, reverse=True)
+
+        frecuenciasOrdenadas = ListaDoble()
+        for pais in paises:
+            frecuenciasOrdenadas.insertarFinal(pais)
+        return frecuenciasOrdenadas
 
     def generarReporte(self, nombreArchivo="reporte_recuperacion.txt"):
         PrecioTotal = 0
@@ -163,6 +174,7 @@ class Menu:
             print("3. Buscar producto por ID")
             print("4. Mostrar productos")
             print("5. Generar reporte de recuperación")
+            print("6. Generar lista de frecuencias por país de origen")
             print("0. Salir")
 
             opcion = input("Seleccione una opción: ")
@@ -191,6 +203,9 @@ class Menu:
             elif opcion == "5":
                 self.lista.generarReporte()
                 print("Reporte generado.")
+            elif opcion == "6":
+                print("Lista de frecuencias por país de origen (mayor a menor):")
+                self.lista.listaFrecuencias().mostrar()
             elif opcion == "0":
                 print("Saliendo del programa.")
                 break
