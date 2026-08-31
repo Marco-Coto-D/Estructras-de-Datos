@@ -175,6 +175,7 @@ class Menu:
             print("4. Mostrar productos")
             print("5. Generar reporte de recuperación")
             print("6. Generar lista de frecuencias por país de origen")
+            print("7. Mostrar productos con cantidad en cero")
             print("0. Salir")
 
             opcion = input("Seleccione una opción: ")
@@ -206,6 +207,14 @@ class Menu:
             elif opcion == "6":
                 print("Lista de frecuencias por país de origen (mayor a menor):")
                 self.lista.listaFrecuencias().mostrar()
+            elif opcion == "7":
+                print("Productos con cantidad en cero:")
+                productosVacios = self.lista.enCero()
+                if productosVacios:
+                    for producto in productosVacios:
+                        print(producto.toString())
+                else:
+                    print("No hay productos con cantidad en cero.")
             elif opcion == "0":
                 print("Saliendo del programa.")
                 break
